@@ -1,0 +1,73 @@
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin-top: 15px;
+}
+.input {
+  border: solid 1px #ff6e00;
+  border-radius: 17px;
+  height: 40px;
+  font-size: 19px;
+  padding-left: 25px;
+  background-color: #fcf1d1;
+}
+input:focus {
+  border: solid 1px #bb0105;
+  outline: none;
+}
+
+.submit-button {
+  border-radius: 19px;
+  border: solid 1px #ff6e00;
+  box-shadow: none;
+  width: 40px;
+  height: 40px;
+  margin-left: 5px;
+  background-color: #fcf1d1;
+}
+
+.user-card {
+  margin: 5px 20px 5px 20px;
+}
+
+.user-info {
+  display: flex;
+  border: 2px solid #fcbd00;
+  border-radius: 5px;
+  margin-bottom: 25px;
+}
+
+.user-img {
+  margin: 10px;
+  width: 120px;
+  height: 120px;
+}
+
+.repo-info {
+  padding-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.repo-list {
+  display: flex;
+  justify-content: space-between;
+  border: solid 1px #555;
+  padding: 7px;
+  margin: 15px 0;
+}
+a {
+  text-decoration: none;
+}
+p {
+  color: rgb(15, 15, 15);
+}
+.not-found-img {
+  display: block;
+  margin-top: 90px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 43%;
+}
