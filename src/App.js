@@ -4,29 +4,35 @@ import './App.css';
 import { GoSearch, GoStar } from 'react-icons/go';
 
 function App() {
-  const [user, setUser] = useState(``);
+  const [field, setField] = useState('');
+  const [user, setUser] = useState('');
   const [status, setStatus] = useState();
   const [userRepositories, setUserRepositories] = useState([]);
 
   async function handleSubmit(e) {
     e.preventDefault();
+
     try {
-      const res = await axios.get(
-        `https://api.github.com/users/${user.replace(' ', '')}/repos`
+      const userRes = await axios.get(
+        `https://api.github.com/users/${field.replace(' ', '')}`
       );
-      setStatus(res.status);
+      setStatus(userRes.status);
+      setUser(userRes.data);
+      setField('');
+      const res = await axios.get(
+        `https://api.github.com/users/${field.replace(' ', '')}/repos`
+      );
       setUserRepositories(res.data);
-      setUser('');
     } catch (err) {
+      console.log(err);
       setStatus(err.response.status);
-      setUser('');
+      setField('');
     }
   }
 
   function handleChange(e) {
-    setUser(e.target.value);
+    setField(e.target.value);
   }
-
   if (status === 200) {
     return (
       <>
@@ -34,7 +40,7 @@ function App() {
           <input
             className='input'
             type='text'
-            value={user}
+            value={field}
             required
             onChange={handleChange}
             placeholder='Insert the username'
@@ -45,17 +51,8 @@ function App() {
         </form>
         <div className='user-card'>
           <div className='user-info'>
-            <img
-              className='user-img'
-              src={
-                userRepositories.length > 0 &&
-                userRepositories[0].owner.avatar_url
-              }
-              alt=''
-            />
-            <p>
-              {userRepositories.length > 0 && userRepositories[0].owner.login}
-            </p>
+            <img className='user-img' src={user.avatar_url} alt='' />
+            <p>{user.name || user.login}</p>
           </div>
           {userRepositories.map((repo) => {
             return (
@@ -81,7 +78,7 @@ function App() {
           <input
             className='input'
             type='text'
-            value={user}
+            value={field}
             required
             onChange={handleChange}
             placeholder='Insert the username'
@@ -104,7 +101,7 @@ function App() {
       <input
         className='input'
         type='text'
-        value={user}
+        value={field}
         required
         onChange={handleChange}
         placeholder='Insert the username'
